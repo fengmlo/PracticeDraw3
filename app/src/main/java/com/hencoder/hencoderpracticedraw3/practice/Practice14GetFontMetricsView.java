@@ -12,10 +12,11 @@ public class Practice14GetFontMetricsView extends View {
     Paint paint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
     Paint paint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
     String[] texts = {"A", "a", "J", "j", "Â", "â"};
-    int top = 200;
+	int top = 200;
     int bottom = 400;
+	private Paint.FontMetrics fontMetrics;
 
-    public Practice14GetFontMetricsView(Context context) {
+	public Practice14GetFontMetricsView(Context context) {
         super(context);
     }
 
@@ -32,6 +33,7 @@ public class Practice14GetFontMetricsView extends View {
         paint1.setStrokeWidth(20);
         paint1.setColor(Color.parseColor("#E91E63"));
         paint2.setTextSize(160);
+	    fontMetrics = paint2.getFontMetrics();
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Practice14GetFontMetricsView extends View {
         // 然后计算出文字的绘制位置，从而让文字上下居中
         // 这种居中算法的优点是，可以让不同的文字的 baseline 对齐
 
-        int middle = (top + bottom) / 2;
+        int middle = (int) ((top + bottom) / 2 - (fontMetrics.ascent + fontMetrics.descent) / 2);
         canvas.drawText(texts[0], 100, middle, paint2);
         canvas.drawText(texts[1], 200, middle, paint2);
         canvas.drawText(texts[2], 300, middle, paint2);
